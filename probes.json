@@ -1,0 +1,19 @@
+{
+  "description": "DAST probe schema — §10 wave 2 (INTAKE-62). File-only SAST corpus + runnable Docker app.",
+  "probes": [
+    {
+      "id": "DAST-01",
+      "sast_file": "dast-vuln-demo/app.py",
+      "route": "GET /echo?msg=",
+      "expect_runtime": "reflected_script_in_body",
+      "cwe": "CWE-79"
+    },
+    {
+      "id": "DAST-02",
+      "sast_file": "dast-vuln-demo/app.py",
+      "route": "GET /redirect?url=https://evil.example",
+      "expect_runtime": "location_header_external",
+      "cwe": "CWE-601"
+    }
+  ]
+}
