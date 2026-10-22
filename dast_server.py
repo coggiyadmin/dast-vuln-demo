@@ -55,7 +55,8 @@ class H(BaseHTTPRequestHandler):
             if p == "/safe/redirect":
                 url = (parse_qs(urlparse(self.path).query).get("url", ["/"]) or ["/"])[0]
                 host = urlparse(url).hostname
-                return self._send("", 302, location=url if host in ALLOWED_HOSTS else "/")
+                location = "https://app.example.com/" if host in ALLOWED_HOSTS else "/"
+                return self._send("", 302, location=location)
 
             # ── command injection (CWE-78) ───────────────────────────────────
             if p == "/vuln/cmd":

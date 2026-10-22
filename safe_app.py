@@ -24,7 +24,9 @@ def xss():
 def redir():
     url = request.args.get("url", "/")
     host = urlparse(url).hostname
-    return redirect(url) if host in ALLOWED_HOSTS else redirect("/")
+    if host not in ALLOWED_HOSTS:
+        return redirect("/")
+    return redirect("https://app.example.com/")
 
 
 @app.get("/safe/cmd")
